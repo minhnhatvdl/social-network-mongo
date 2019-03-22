@@ -1,0 +1,12 @@
+{
+  "name": "social-network-mongo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/minhnhatvdl/social-network-mongo.git",
+  "author": "minhnhatvdl <minhnhatvdl@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^5.4.19",
+    "nodemon": "^1.18.10"
+  }
+}

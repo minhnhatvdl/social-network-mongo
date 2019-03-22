@@ -1,0 +1,18 @@
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
+// import Like
+import { LikeSchema } from "./Like";
+// create a schema post
+const PostSchema = new Schema({
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  createdDate: { type: Date, default: new Date().getDate() },
+  likes: { type: LikeSchema }
+});
+// model Post
+const Post = mongoose.model("Post", PostSchema);
+// export
+module.exports({
+  PostSchema,
+  Post
+});
