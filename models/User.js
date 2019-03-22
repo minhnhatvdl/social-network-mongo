@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 // import Profile
-import { ProfileSchema } from "./Profile";
+const { ProfileSchema, Profile } = require("./Profile");
 // create a schema user
 const UserSchema = new Schema({
   username: { type: String, required: true },
@@ -9,7 +9,7 @@ const UserSchema = new Schema({
   email: { type: String, required: true },
   name: { type: String, required: true },
   dateOfBirth: { type: Date, required: true },
-  registerDate: { type: Date, default: new Date().getDate() },
+  registerDate: { type: Date, default: Date.now },
   groupId: {
     type: Schema.Types.ObjectId,
     ref: "Group"
@@ -19,7 +19,7 @@ const UserSchema = new Schema({
 // model User
 const User = mongoose.model("User", UserSchema);
 // export
-module.exports({
+module.exports = {
   UserSchema,
   User
-});
+};
