@@ -10,6 +10,8 @@ const {
 // post
 const { createPost, updatePost, deletePost } = require("./controls/post");
 const { Post } = require("./models/Post");
+// like
+const { likePost } = require("./controls/like");
 // connect to server
 mongoose
   .connect("mongodb://localhost:27017/social-network", {
@@ -67,7 +69,20 @@ mongoose
 // // update a post
 // updatePost("5c96a3d772708a153248b912", "Sport", "Vietnam - Indo");
 
-Post.find({userId: "5c96a2b08df28d148703c3ed"})
-  .populate("userId", { username: 1, _id: 0 })
-  .then(console.log)
+// Post.find({userId: "5c96a2b08df28d148703c3ed"})
+//   .populate("userId", { username: 1, _id: 0 })
+//   .then(console.log)
+//   .catch(console.log);
+
+// // like and dislike
+// likePost("5c96a3d772708a153248b912", "5c96a2b08df28d148703c3ee");
+
+// // like and dislike
+// likePost("5c96a3d772708a153248b912", "5c96a2b08df28d148703c3ed");
+
+// query like
+Post.find({}, { _id: 0, title: 1, likes: 1 })
+  .populate("userId", { _id: 0, username: 1 })
+  .populate("likes.userId", {_id: 0, username: 1})
+  .then(result => console.log(JSON.stringify(result, undefined, 2)))
   .catch(console.log);
