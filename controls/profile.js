@@ -42,7 +42,9 @@ exports.updateProfile = async (
     user.profile = profileUpdate;
     const result = await user.save();
     console.log(result);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // delete a profile

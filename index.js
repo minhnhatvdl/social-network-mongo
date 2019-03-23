@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
+// user
 const { createUser, updateUser, deleteUser } = require("./controls/user");
-const { createProfile, updateProfile, deleteProfile } = require("./controls/profile");
+// profile
+const {
+  createProfile,
+  updateProfile,
+  deleteProfile
+} = require("./controls/profile");
+// post
+const { createPost, updatePost, deletePost } = require("./controls/post");
+const { Post } = require("./models/Post");
 // connect to server
 mongoose
   .connect("mongodb://localhost:27017/social-network", {
@@ -51,3 +60,14 @@ mongoose
 
 // // delete a profile
 // deleteProfile("5c964b7ce8e3fd0d38a6ec6c");
+
+// // create a post
+// createPost("Movie", "End game", "5c96a2b08df28d148703c3ed");
+
+// // update a post
+// updatePost("5c96a3d772708a153248b912", "Sport", "Vietnam - Indo");
+
+Post.find({userId: "5c96a2b08df28d148703c3ed"})
+  .populate("userId", { username: 1, _id: 0 })
+  .then(console.log)
+  .catch(console.log);
