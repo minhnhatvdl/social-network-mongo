@@ -19,11 +19,11 @@ mongoose
 
 // // update a user
 // updateUser(
-//   "5c955506386103057e343cd6",
+//   "5c964b7ce8e3fd0d38a6ec6c",
 //   "dho",
 //   "minhnhatvdl",
 //   "minhnhatvdl@gmail.com",
-//   "hd minh nhat",
+//   "ho dac minh nhat",
 //   "18-11-1992"
 // );
 

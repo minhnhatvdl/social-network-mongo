@@ -1,5 +1,4 @@
 const { User } = require("../models/User");
-const { ObjectId } = require("mongodb");
 // create a user
 exports.createUser = async (
   username,
@@ -49,7 +48,7 @@ exports.updateUser = async (
 ) => {
   try {
     const result = await User.findOneAndUpdate(
-      { _id: ObjectId(userId) },
+      { _id: userId },
       {
         $set: {
           username,
