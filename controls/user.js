@@ -15,7 +15,7 @@ exports.createUser = async (
     const user = await User.findOne({
       $or: [{ username }, { email }]
     });
-    if (user) throw new Error("user is exist");
+    if (user) throw new Error("user exist");
     // create a new user
     const newUser = new User({
       username,
