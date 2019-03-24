@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 // create a schema comment
 const CommentSchema = new Schema({
   commnent: { type: String, required: true },
-  createdDate: { type: Date, default: new Date().getDate() },
+  createdDate: { type: Date, default: Date.now },
   postId: {
     type: Schema.Types.ObjectId,
     ref: "Post"
@@ -16,7 +16,7 @@ const CommentSchema = new Schema({
 // model Comment
 const Comment = mongoose.model("Comment", CommentSchema);
 // export
-module.exports({
+module.exports = {
   CommentSchema,
   Comment
-});
+};

@@ -12,6 +12,14 @@ const { createPost, updatePost, deletePost } = require("./controls/post");
 const { Post } = require("./models/Post");
 // like
 const { likePost } = require("./controls/like");
+// comment
+const {
+  createComment,
+  updateComment,
+  deleteComment
+} = require("./controls/comment");
+const { Comment } = require("./models/Comment");
+
 // connect to server
 mongoose
   .connect("mongodb://localhost:27017/social-network", {
@@ -80,9 +88,42 @@ mongoose
 // // like and dislike
 // likePost("5c96a3d772708a153248b912", "5c96a2b08df28d148703c3ed");
 
-// query like
-Post.find({}, { _id: 0, title: 1, likes: 1 })
-  .populate("userId", { _id: 0, username: 1 })
-  .populate("likes.userId", {_id: 0, username: 1})
-  .then(result => console.log(JSON.stringify(result, undefined, 2)))
-  .catch(console.log);
+// // query like
+// Post.find({}, { _id: 0, title: 1, likes: 1 })
+//   .populate("userId", { _id: 0, username: 1 })
+//   .populate("likes.userId", {_id: 0, username: 1})
+//   .then(result => console.log(JSON.stringify(result, undefined, 2)))
+//   .catch(console.log);
+
+// // create a comment
+// createComment("5c96a3d772708a153248b912", "5c964b7ce8e3fd0d38a6ec6c", "We won");
+
+// // create a comment
+// createComment("5c96a3d772708a153248b912", "5c96a2b08df28d148703c3ed", "We won");
+
+// // update a comment
+// updateComment("5c97d64ad1c9652708c039af", "That is so great");
+
+// // delete a comment
+// deleteComment("5c97d4d41a7f73250b5f8b7d");
+
+// query comment
+const getComment = async () => {
+  const comments = await Comment.aggregate([
+    {
+      $group: {
+        _id: "$postId",
+        comments: { $push: "$comment" },
+        postId: { $push: "$postId" }
+      }
+    }
+  ]);
+  const result = await Comment.populate(comments, {
+    path: "postId",
+    select: "title -_id"
+  });
+  console.log(result);
+};
+
+getComment();
+
