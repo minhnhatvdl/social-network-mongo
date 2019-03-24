@@ -19,7 +19,9 @@ const {
   deleteComment
 } = require("./controls/comment");
 const { Comment } = require("./models/Comment");
-
+// group
+const { createGroup, addUserInGroup } = require("./controls/group");
+const { Group } = require("./models/Group");
 // connect to server
 mongoose
   .connect("mongodb://localhost:27017/social-network", {
@@ -107,23 +109,28 @@ mongoose
 // // delete a comment
 // deleteComment("5c97d4d41a7f73250b5f8b7d");
 
-// query comment
-const getComment = async () => {
-  const comments = await Comment.aggregate([
-    {
-      $group: {
-        _id: "$postId",
-        comments: { $push: "$comment" },
-        postId: { $push: "$postId" }
-      }
-    }
-  ]);
-  const result = await Comment.populate(comments, {
-    path: "postId",
-    select: "title -_id"
-  });
-  console.log(result);
-};
+// // query comment
+// const getComment = async () => {
+//   const comments = await Comment.aggregate([
+//     {
+//       $group: {
+//         _id: "$postId",
+//         comments: { $push: "$comment" },
+//         postId: { $push: "$postId" }
+//       }
+//     }
+//   ]);
+//   const result = await Comment.populate(comments, {
+//     path: "postId",
+//     select: "title -_id"
+//   });
+//   console.log(result);
+// };
 
-getComment();
+// getComment();
 
+// // create a group
+// createGroup("MongoDb", "Share and study");
+
+// // add a user in a group
+// addUserInGroup("5c964b7ce8e3fd0d38a6ec6c", "5c97eba403a4052ea2c24df7");

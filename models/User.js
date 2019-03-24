@@ -10,8 +10,8 @@ const UserSchema = new Schema({
   name: { type: String, required: true },
   dateOfBirth: { type: Date, required: true },
   registerDate: { type: Date, default: Date.now },
-  groupId: {
-    type: Schema.Types.ObjectId,
+  groupIds: {
+    type: [Schema.Types.ObjectId],
     ref: "Group"
   },
   profile: { type: ProfileSchema }
